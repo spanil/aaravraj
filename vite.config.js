@@ -10,4 +10,9 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+    resolve: {
+        alias: {
+            '@fortawesome': '/node_modules/@fortawesome',
+        }
+    }
 });
