@@ -35,8 +35,8 @@ class PermissionController extends Controller
      */
     public function create()
     {
-         $permission = new Permission();
-         return view('admin/permissions.create',compact('permission'));
+         $data = new Permission();
+         return view('admin/permissions.create',compact('data'));
     }
 
     /**
@@ -53,8 +53,8 @@ class PermissionController extends Controller
      */
     public function show(string $id)
     {
-        $permission = $this->repository->find($id);
-        return view('admin/permissions.show', compact('permission'));
+        $data = $this->repository->find($id);
+        return view('admin/permissions.show', compact('data'));
 
     }
 
@@ -63,8 +63,8 @@ class PermissionController extends Controller
      */
     public function edit(string $id)
     {
-        $permission = $this->repository->find($id);
-        return view('admin/permissions.edit', compact('permission'));
+        $data = $this->repository->find($id);
+        return view('admin/permissions.edit', compact('data'));
     }
 
     /**

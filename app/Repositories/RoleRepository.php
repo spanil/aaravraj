@@ -1,8 +1,9 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Permission; 
-use App\Repositories\Interfaces\ArticleRepositoryInterface;
+use App\Models\Role; 
+use App\Interfaces\RoleRepositoryInterface;
+use Yajra\DataTables\DataTables;
 
 class RoleRepository implements RoleRepositoryInterface
 {
@@ -11,6 +12,22 @@ class RoleRepository implements RoleRepositoryInterface
     public function __construct(Role $model)
     {
         $this->model = $model;
+    }
+
+    public function datatable()
+    {
+        $query = Role::query();
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('action', function ($model) {
+                return '<a href="'.route('admin.roles.edit', $model->id).'" class="btn btn-sm btn-primary" title="Edit"><i class="fas fa-edit"></i></a>
+                <form action="'.route('admin.roles.destroy', $model->id).'" method="POST" style="display: inline;">
+            '.csrf_field().method_field('DELETE').'
+            <button class="btn btn-sm btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+        </form>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 
     public function all()

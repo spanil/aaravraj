@@ -14,7 +14,6 @@
             <!--end::Row-->
           </div>
           <!--end::Container-->
-        </div>
         <div class="app-content">
           <!--begin::Container-->
           <div class="container-fluid">

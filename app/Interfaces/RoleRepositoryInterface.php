@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories;
+namespace App\Interfaces;
 
 interface RoleRepositoryInterface
 {
@@ -8,5 +8,6 @@ interface RoleRepositoryInterface
     public function create(array $data);
     public function update($id, array $data);
     public function delete($id);
+    public function datatable();
 }
 ?>

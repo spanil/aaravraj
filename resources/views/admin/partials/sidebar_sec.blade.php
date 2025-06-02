@@ -5,7 +5,7 @@
           <a href="./index.html" class="brand-link">
             <!--begin::Brand Image-->
             <img
-              src="../../dist/assets/img/AdminLTELogo.png"
+              src="{{asset('admins/dist/assets/img/AdminLTELogo.png')}}"
               alt="AdminLTE Logo"
               class="brand-image opacity-75 shadow"
             />
@@ -43,13 +43,13 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="./index2.html" class="nav-link">
+                    <a href="{{route('admin.permissions.index')}}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Permision</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="./index3.html" class="nav-link active">
+                    <a href="{{route('admin.roles.index')}}" class="nav-link active">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Role</p>
                     </a>

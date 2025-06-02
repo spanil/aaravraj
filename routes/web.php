@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -13,7 +14,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('permissions', PermissionController::class)->except(['show']); 
-    Route::get('/permissions/data', [PermissionController::class, 'getData'])->name('permissions.data');   
+    Route::get('/permissions/data', [PermissionController::class, 'getData'])->name('permissions.data');    
+    Route::resource('roles', RoleController::class)->except(['show']); 
+    Route::get('/roles/data', [RoleController::class, 'getData'])->name('roles.data');   
 });
 
 Route::get('/email/verify', function () {
