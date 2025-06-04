@@ -22,6 +22,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'mobile_no',
+        'role_id',
     ];
 
     /**
@@ -51,14 +53,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Role::class);
     }
-
-    public function hasPermission($permission)
-    {
-        return $this->roles()
-            ->with('permissions')
-            ->get()
-            ->flatMap->permissions
-            ->pluck('name')
-            ->contains($permission);
-    }
+   
 }

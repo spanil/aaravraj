@@ -4,18 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Interfaces\PermissionRepositoryInterface;
-Use App\Models\Permission;
-use App\Http\Requests\Admin\Permission\DeleteRequest;
-use App\Http\Requests\Admin\Permission\ListRequest;
-use App\Http\Requests\Admin\Permission\StoreRequest;
-use App\Http\Requests\Admin\Permission\UpdateRequest;
+use App\Interfaces\UserRepositoryInterface;
+Use App\Models\User;
+Use App\Models\Role;
+use App\Http\Requests\Admin\User\DeleteRequest;
+use App\Http\Requests\Admin\User\ListRequest;
+use App\Http\Requests\Admin\User\StoreRequest;
+use App\Http\Requests\Admin\User\UpdateRequest;
 
-class PermissionController extends Controller
+class UserController extends Controller
 {
     private $repository;
 
-    public function __construct(PermissionRepositoryInterface $repository)
+    public function __construct(UserRepositoryInterface $repository)
     {
        $this->repository = $repository;
     }
@@ -26,7 +27,7 @@ class PermissionController extends Controller
     public function index()
     {
         $datas = $this->repository->all();
-        return view('admin/permissions.index')->with('datas', $datas);
+        return view('admin/users.index')->with('datas', $datas);
 
     }
 
@@ -35,8 +36,9 @@ class PermissionController extends Controller
      */
     public function create()
     {
-         $data = new Permission();
-         return view('admin/permissions.create',compact('data'));
+         $data = new User();
+         $roles = Role::all();
+         return view('admin/users.create',compact('data','roles'));
     }
 
     /**
@@ -45,7 +47,7 @@ class PermissionController extends Controller
     public function store(StoreRequest $request)
    {  
         $this->repository->create($request->validated());
-        return redirect()->route('admin.permissions.index')->with('success', 'Permission created successfully.');
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
     }
 
     /**
@@ -54,7 +56,7 @@ class PermissionController extends Controller
     public function show(string $id)
     {
         $data = $this->repository->find($id);
-        return view('admin/permissions.show', compact('data'));
+        return view('admin/users.show', compact('data'));
 
     }
 
@@ -64,7 +66,8 @@ class PermissionController extends Controller
     public function edit(string $id)
     {
         $data = $this->repository->find($id);
-        return view('admin/permissions.edit', compact('data'));
+        $roles = Role::all();
+        return view('admin/users.edit', compact('data','roles'));
     }
 
     /**
@@ -73,7 +76,7 @@ class PermissionController extends Controller
     public function update(UpdateRequest $request, string $id)
     {
         $this->repository->update($id, $request->validated());
-        return redirect()->route('admin.permissions.index')->with('success', 'Permission updated successfully.');
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
     }
 
     /**
@@ -82,7 +85,7 @@ class PermissionController extends Controller
     public function destroy(string $id)
     {
         $this->repository->delete($id);
-        return redirect()->route('admin.permissions.index')->with('success', 'Permission deleted.');
+        return redirect()->route('admin.users.index')->with('success', 'User deleted.');
     }
 
     public function getData()

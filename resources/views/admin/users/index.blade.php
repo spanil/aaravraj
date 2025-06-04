@@ -1,29 +1,33 @@
 @extends('admin.layout')
 @section('content')
-            <div class="container-fluid">
-                <div class="row mb-2">
-                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>                            
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Dashboard</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Dashboard v3</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+         @include('admin.partials.message')
 
         <!-- Main content -->
-        <section class="content">
+        <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">DataTable with default features</h3>
-                                <h3 class="card-title" style="float: right"><a href="{{route('admin.permissions.create')}}">+Add</a></h3>
+                                <h3 class="card-title" style="float: right"><a href="{{route('admin.users.create')}}">+Add</a></h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="permissions-table" class="table table-bordered table-striped">
+                                <table id="users-table" class="table table-bordered table-striped">
                                     <thead>
                                    <tr>
                                         <th>ID</th>
@@ -45,7 +49,7 @@
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
-        </section>
+        </div>
         <!-- /.content -->
     @stop
 @push('css')
@@ -59,10 +63,10 @@
 
     <script>
         $(function () {
-            $('#permissions-table').DataTable({
+            $('#users-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('admin.permissions.data') }}',
+                ajax: '{{ route('admin.users.data') }}',
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'name', name: 'name' },
@@ -72,4 +76,14 @@
             });
         });
     </script>
+    <script>
+    setTimeout(() => {
+        const alert = document.querySelector('.alert');
+        if (alert) {
+            alert.classList.remove('show');
+            alert.classList.add('fade');
+            setTimeout(() => alert.remove(), 300);
+        }
+    }, 3000);
+</script>
 @endpush

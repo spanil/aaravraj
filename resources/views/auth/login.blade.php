@@ -7,6 +7,7 @@
      @vite(['resources/js/app.js'])
     <!-- AdminLTE CSS -->
    <link rel="stylesheet" href="{{asset('admins/dist/css/adminlte.css')}}" />
+   <link rel="stylesheet" href="{{ asset('admins/dist/css/custom.css') }}">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">

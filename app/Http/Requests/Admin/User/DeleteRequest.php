@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Permission;
+namespace App\Http\Requests\Admin\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,7 +22,7 @@ class DeleteRequest extends FormRequest
      public function rules(): array
     {
         return [
-            'id' => 'required|exists:permissions,id',
+            'id' => 'required|exists:users,id',
         ];
     }
 }

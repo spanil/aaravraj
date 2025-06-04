@@ -23,7 +23,7 @@ class RoleRepository implements RoleRepositoryInterface
                 return '<a href="'.route('admin.roles.edit', $model->id).'" class="btn btn-sm btn-primary" title="Edit"><i class="fas fa-edit"></i></a>
                 <form action="'.route('admin.roles.destroy', $model->id).'" method="POST" style="display: inline;">
             '.csrf_field().method_field('DELETE').'
-            <button class="btn btn-sm btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+            <button class="resetbtn btn btn-danger btn-sm" type="submit"><i class="fas fa-trash-alt"></i></button>
         </form>';
             })
             ->rawColumns(['action'])

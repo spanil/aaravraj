@@ -1,18 +1,21 @@
 @extends('admin.layout')
 @section('content')
-            <div class="container-fluid">
-                <div class="row mb-2">
-                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>                            
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
+           <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Dashboard</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Dashboard v3</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+        @include('admin.partials.toast')
+        <!--begin::Container-->
+        <div class="app-content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -45,17 +48,20 @@
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
-        </section>
+        </div>
         <!-- /.content -->
     @stop
 @push('css')
     {{-- Load DataTables CSS --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{{asset('admins/dist/css/jquery-confirm.min.css')}}">
 @endpush
 
 @push('scripts')
     {{-- Load DataTables JS --}}
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="{{asset('admins/dist/js/jquery-confirm.min.js')}}"></script>
+    
 
     <script>
         $(function () {
@@ -72,4 +78,18 @@
             });
         });
     </script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const toastEl = document.getElementById('toast-message');
+        if (toastEl) {
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+    });
+    toastEl.addEventListener('shown.bs.toast', () => {
+    setTimeout(() => {
+        toast.hide();
+    }, 3000);
+});
+</script>
 @endpush

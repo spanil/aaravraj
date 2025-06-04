@@ -37,21 +37,21 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="./index.html" class="nav-link">
+                    <a href="{{route('admin.users.index')}}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Change Password</p>
+                      <p>Manage User</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('admin.permissions.index')}}" class="nav-link">
+                    <a href="{{route('admin.roles.index')}}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Permision</p>
+                      <p>User Groups</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="{{route('admin.roles.index')}}" class="nav-link active">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Role</p>
+                      <p>Role Access</p>
                     </a>
                   </li>
                 </ul>
