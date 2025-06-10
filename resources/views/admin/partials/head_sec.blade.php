@@ -16,6 +16,7 @@
     <!--end::Primary Meta Tags-->
     <!--begin::Fonts-->
     <head>
+         <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- 1. Vite Directive (MUST come first for CSS) -->
     @vite(['resources/js/app.js'])
     

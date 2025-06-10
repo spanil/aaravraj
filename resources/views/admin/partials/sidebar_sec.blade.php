@@ -49,38 +49,33 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('admin.roles.index')}}" class="nav-link active">
+                    <a href="{{route('admin.roleMenuPermission.index')}}" class="nav-link active">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Role Access</p>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <a href="./generate/theme.html" class="nav-link">
-                  <i class="nav-icon bi bi-palette"></i>
-                  <p>Theme Generate</p>
-                </a>
-              </li>
+      
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
                   <p>
-                    Widgets
+                   Product Management
                     <i class="nav-arrow bi bi-chevron-right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="./widgets/small-box.html" class="nav-link">
+                    <a href="{{route('admin.categories.index')}}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Small Box</p>
+                      <p>Category</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="./widgets/info-box.html" class="nav-link">
+                    <a href="{{route('admin.products.index')}}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>info Box</p>
+                      <p>Product</p>
                     </a>
                   </li>
                   <li class="nav-item">

@@ -30,10 +30,11 @@
                                     {{csrf_field()}}
                                     <div class="card-body">
          <div class="form-group">
-            <label for="exampleInputEmail1">Admin Role Type</label>
+            <label for="exampleInputEmail1">Group</label>
              <select name="role_id" id="role_id" class="form-control">
+                <option value="">--Choose Group--</option>
                 @foreach($roles as $role)
-                 <option value="{{$role->id}}">{{$role->name}}</option>
+                 <option value="{{$role->id}}" @if($role->id == old('role_id')) selected @endif>{{$role->name}}</option>
                 @endforeach 
              </select>
             @if ($errors->has('roles'))
@@ -44,7 +45,7 @@
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Name</label>
-            <input type="text" name="name"  class="form-control" id="name" placeholder="Enter Name">
+            <input type="text" name="name"  class="form-control" id="name" placeholder="Enter Name" value="{{old('name')}}">
             @if ($errors->has('name'))
                 <span class="help-block" style="color: red;">
                                     <strong>{{ $errors->first('name') }}</strong>
@@ -53,7 +54,7 @@
         </div>
          <div class="form-group">
             <label for="exampleInputEmail1">Email</label>
-            <input type="text" name="email"  class="form-control" id="email" placeholder="Enter Email">
+            <input type="text" name="email"  class="form-control" id="email" placeholder="Enter Email" value="{{old('email')}}">
             @if ($errors->has('email'))
                  <span class="help-block" style="color: red;">
                                     <strong>{{ $errors->first('email') }}</strong>
@@ -62,7 +63,7 @@
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">Mobile No</label>
-            <input type="text" name="mobile_no" class="form-control" id="mobile_no" placeholder="Enter Mobile No">
+            <input type="text" name="mobile_no" class="form-control" id="mobile_no" placeholder="Enter Mobile No" value="{{old('mobile_no')}}">
             @if ($errors->has('mobile_no'))
                 <span class="help-block" style="color: red;">
                                     <strong>{{ $errors->first('mobile_no') }}</strong>

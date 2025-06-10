@@ -35,7 +35,7 @@
             <label for="exampleInputEmail1">Admin Role Type</label>
              <select name="role_id" id="role_id" class="form-control">
                 @foreach($roles as $role)
-                 <option value="{{$role->id}}">{{$role->name}}</option>
+                 <option value="{{$role->id}}" @if($role->id == $data->role_id) selected @endif>{{$role->name}}</option>
                 @endforeach 
              </select>
             @if ($errors->has('roles'))
