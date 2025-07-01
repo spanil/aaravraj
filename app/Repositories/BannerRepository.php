@@ -1,31 +1,31 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Category; 
-use App\Interfaces\CategoryRepositoryInterface;
+use App\Models\Banner; 
+use App\Interfaces\BannerRepositoryInterface;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
 use App\Traits\StoreImageTrait;
 use Illuminate\Support\Facades\Storage;
 
-class CategoryRepository implements CategoryRepositoryInterface
+class BannerRepository implements BannerRepositoryInterface
 {
     use StoreImageTrait;
     protected $model;
 
-    public function __construct(Category $model)
+    public function __construct(Banner $model)
     {
         $this->model = $model;
     }
 
     public function datatable()
     {
-        $query = Category::query();
+        $query = Banner::query();
         return DataTables::of($query)
             ->addIndexColumn()
             ->addColumn('action', function ($model) {
-                return '<a href="'.route('admin.categories.edit', $model->id).'" class="btn btn-sm btn-primary" title="Edit"><i class="fas fa-edit"></i></a>
-                <form action="'.route('admin.categories.destroy', $model->id).'" method="POST" style="display: inline;">
+                return '<a href="'.route('admin.banners.edit', $model->id).'" class="btn btn-sm btn-primary" title="Edit"><i class="fas fa-edit"></i></a>
+                <form action="'.route('admin.banners.destroy', $model->id).'" method="POST" style="display: inline;">
             '.csrf_field().method_field('DELETE').'
             <button class="resetbtn btn btn-danger btn-sm" type="submit"><i class="fas fa-trash-alt"></i></button>
         </form>';

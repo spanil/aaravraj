@@ -9,6 +9,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleMenuPermissionController;
+use App\Http\Controllers\Admin\GeneralSettingController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\PageController;
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -26,9 +29,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
     Route::get('/categories/data', [CategoryController::class, 'getData'])->name('categories.data'); 
     Route::resource('products', ProductController::class)->except(['show']); 
     Route::get('/products/data', [ProductController::class, 'getData'])->name('products.data');  
+    Route::get('/general_settings', [GeneralSettingController::class, 'index'])->name('general_settings.index');  
+    Route::post('/general_settings', [GeneralSettingController::class, 'store'])->name('general_settings.store');  
+    Route::resource('banners', BannerController::class)->except(['show']);
+    Route::get('/banners/data', [BannerController::class, 'getData'])->name('banners.data'); 
+    Route::resource('pages', PageController::class)->except(['show']);
+    Route::get('/pages/data', [PageController::class, 'getData'])->name('pages.data');   
 
 });
-
 Route::get('/email/verify', function () {
     return view('auth.verify-email'); 
 })->middleware('auth')->name('verification.notice');

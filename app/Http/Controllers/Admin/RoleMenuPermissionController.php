@@ -17,19 +17,19 @@ class RoleMenuPermissionController extends Controller
         $roles = Role::all();
         if ($request->role_id) {
             $role_id = $request->input('role_id');
-            RoleMenuPermission::copyMenu($role_id);
+            Menu::copyMenu($role_id);
             $menus = Menu::with([
                 'children.children',
-                    'roleMenuPermissions' => function ($query) use ($role_id) {
+                    'roles' => function ($query) use ($role_id) {
                         $query->where('role_id', $role_id);
                 },
-                'children.roleMenuPermissions' => function ($query) use ($role_id) {
+                'children.roles' => function ($query) use ($role_id) {
                     $query->where('role_id', $role_id);
                 },
-                'children.children.roleMenuPermissions' => function ($query) use ($role_id) {
+                'children.children.roles' => function ($query) use ($role_id) {
                     $query->where('role_id', $role_id);
                 },
-            ])->where('parent_id', 0)->get();         
+            ])->where('parent_id', 0)->get();   
         }else {
             $menus = [];
         }      
@@ -38,22 +38,6 @@ class RoleMenuPermissionController extends Controller
     }
 
 
-
-public function showRolePermissions__($roleId) 
-{
-    $currentRole = Role::findOrFail($roleId); 
-   
-    $menus = Menu::with(['children' => function ($query) use ($roleId) {
-        $query->with(['permissionsForRole' => function (HasMany $q) use ($roleId) {
-            $q->where('role_id', $roleId);
-        }]);
-    }, 'permissionsForRole' => function (HasMany $q) use ($roleId) {
-        $q->where('role_id', $roleId);
-    }])->whereNull('parent_id')
-      ->get();
-
-    return view('admin.role_menu_permission.index', compact('menus', 'currentRole'));
-}
 
 public function updatePermission(Request $request) 
 {

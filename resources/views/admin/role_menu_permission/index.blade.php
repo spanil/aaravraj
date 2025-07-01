@@ -56,7 +56,7 @@
                                     <tbody>
                                         @php $i = 1; @endphp
                                         @foreach($menus as $parentMenu)
-                                         @php $parentPermission = $parentMenu->roleMenuPermissions->first(); @endphp                                       
+                                         @php $parentPermission = $parentMenu->roles->first(); @endphp                                       
                                             <tr>
                                           
                                                 <td>{{$i}} . {{$parentMenu->menu_name}}</td>
@@ -66,7 +66,7 @@
                                                 id="menu-{{$parentMenu->id}}" 
                                                 data-role-id={{request('role_id')}} 
                                                 data-menu-id={{$parentMenu->id}} 
-                                                data-permission="has_view_access" {{ $parentPermission?->has_view_access ? 'checked' : '' }}>
+                                                data-permission="has_view_access" {{ $parentPermission->pivot?->has_view_access ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                 </div>
                                             </td> 
@@ -75,7 +75,7 @@
                                                  id="menu-{{$parentMenu->id}}" 
                                                 data-role-id={{request('role_id')}} 
                                                 data-menu-id={{$parentMenu->id}} 
-                                                data-permission="has_create_access" {{ $parentPermission?->has_create_access ? 'checked' : '' }}>
+                                                data-permission="has_create_access" {{ $parentPermission->pivot?->has_create_access ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                 </div>
                                             </td> 
@@ -84,7 +84,7 @@
                                                  id="menu-{{$parentMenu->id}}" 
                                                 data-role-id={{request('role_id')}} 
                                                 data-menu-id={{$parentMenu->id}} 
-                                                data-permission="has_update_access"  {{ $parentPermission?->has_update_access ? 'checked' : '' }}>
+                                                data-permission="has_update_access"  {{ $parentPermission->pivot?->has_update_access ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                 </div>
                                             </td> 
@@ -93,7 +93,7 @@
                                                  id="menu-{{$parentMenu->id}}" 
                                                 data-role-id={{request('role_id')}} 
                                                 data-menu-id={{$parentMenu->id}} 
-                                                data-permission="has_delete_access" {{ $parentPermission?->has_delete_access ? 'checked' : '' }}>
+                                                data-permission="has_delete_access" {{ $parentPermission->pivot?->has_delete_access ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                 </div>
                                             </td>
@@ -102,7 +102,7 @@
                                             @if($parentMenu->children->isNotEmpty())
                                                 @php $j = 1; @endphp
                                                 @foreach($parentMenu->children as $childMenu)
-                                                 @php $childPermission = $childMenu->roleMenuPermissions->first(); @endphp
+                                                 @php $childPermission = $childMenu->roles->first(); @endphp
                                                 
                                                     <tr>
                                                         <td><p style="padding-left: 15px;">{{$i}} . {{$j}} {{$childMenu->menu_name}}</p></td>
@@ -112,7 +112,7 @@
                                                 data-role-id={{request('role_id')}} 
                                                 data-menu-id={{$childMenu->id}} 
                                                 data-permission="has_view_access"
-                                                {{ $childPermission?->has_view_access ? 'checked' : '' }}>
+                                                {{ $childPermission->pivot?->has_view_access ? 'checked' : '' }}>
                                                           <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                         </div></td> 
                                                         <td><div class="form-check form-switch">
@@ -121,7 +121,7 @@
                                                 data-role-id={{request('role_id')}} 
                                                 data-menu-id={{$childMenu->id}} 
                                                 data-permission="has_create_access"
-                                                {{ $childPermission?->has_create_access ? 'checked' : '' }}>
+                                                {{ $childPermission->pivot?->has_create_access ? 'checked' : '' }}>
                                                           <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                         </div></td> 
                                                         <td><div class="form-check form-switch">
@@ -130,7 +130,7 @@
                                                 data-role-id={{request('role_id')}} 
                                                 data-menu-id={{$childMenu->id}} 
                                                 data-permission="has_update_access"
-                                                {{ $childPermission?->has_update_access ? 'checked' : '' }}>
+                                                {{ $childPermission->pivot?->has_update_access ? 'checked' : '' }}>
                                                           <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                         </div></td> 
                                                         <td><div class="form-check form-switch">
@@ -139,7 +139,7 @@
                                                 data-role-id={{request('role_id')}} 
                                                 data-menu-id={{$childMenu->id}} 
                                                 data-permission="has_delete_access"
-                                                {{ $childPermission?->has_delete_access ? 'checked' : '' }}>
+                                                {{ $childPermission->pivot?->has_delete_access ? 'checked' : '' }}>
                                                           <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                         </div></td>
 
@@ -150,7 +150,7 @@
                                                     @if($childMenu->children->isNotEmpty())
                                                         @php $k = 1; @endphp
                                                         @foreach($childMenu->children as $grandChildMenu)
-                                                         @php $grandChildPermission = $grandChildMenu->roleMenuPermissions->first(); @endphp                                                        
+                                                         @php $grandChildPermission = $grandChildMenu->roles->first(); @endphp                                                        
                                                             <tr>
                                                             <td><p style="padding-left: 35px;">{{$i}} . {{$j}} . {{$k}} {{$grandChildMenu->menu_name}}</p></td>
 
@@ -160,7 +160,7 @@
                                                 data-role-id={{request('role_id')}} 
                                                 data-menu-id={{$grandChildMenu->id}} 
                                                 data-permission="has_view_access"
-                                                {{ $grandChildPermission?->has_view_access ? 'checked' : '' }}>
+                                                {{ $grandChildPermission->pivot?->has_view_access ? 'checked' : '' }}>
                                                           <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                         </div></td> 
                                                         <td><div class="form-check form-switch">
@@ -169,7 +169,7 @@
                                                 data-role-id={{request('role_id')}} 
                                                 data-menu-id={{$grandChildMenu->id}} 
                                                 data-permission="has_create_access"
-                                                {{ $grandChildPermission?->has_create_access ? 'checked' : '' }}>
+                                                {{ $grandChildPermission->pivot?->has_create_access ? 'checked' : '' }}>
                                                           <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                         </div></td> 
                                                         <td><div class="form-check form-switch">
@@ -178,7 +178,7 @@
                                                 data-role-id={{request('role_id')}} 
                                                 data-menu-id={{$grandChildMenu->id}} 
                                                 data-permission="has_update_access"
-                                                {{ $grandChildPermission?->has_update_access ? 'checked' : '' }}>
+                                                {{ $grandChildPermission->pivot?->has_update_access ? 'checked' : '' }}>
                                                           <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                         </div></td> 
                                                         <td><div class="form-check form-switch">
@@ -187,7 +187,7 @@
                                                 data-role-id={{request('role_id')}} 
                                                 data-menu-id={{$grandChildMenu->id}} 
                                                 data-permission="has_delete_access"
-                                                {{ $grandChildPermission?->has_delete_access ? 'checked' : '' }}>
+                                                {{ $grandChildPermission->pivot?->has_delete_access ? 'checked' : '' }}>
                                                           <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                                         </div></td>
                                                 

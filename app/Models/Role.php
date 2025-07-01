@@ -16,6 +16,7 @@ class Role extends Model
 
     public function menus()
     {
-        return $this->belongsToMany(Menu::class);
+        return $this->belongsToMany(Menu::class,'role_menu_permissions')
+                ->withPivot('has_view_access', 'has_create_access', 'has_update_access', 'has_delete_access');
     }
 }
