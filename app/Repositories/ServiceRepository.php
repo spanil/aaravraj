@@ -1,31 +1,31 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Banner; 
-use App\Interfaces\BannerRepositoryInterface;
+use App\Models\Service; 
+use App\Interfaces\ServiceRepositoryInterface;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
 use App\Traits\StoreImageTrait;
 use Illuminate\Support\Facades\Storage;
 
-class BannerRepository implements BannerRepositoryInterface
+class ServiceRepository implements ServiceRepositoryInterface
 {
     use StoreImageTrait;
     protected $model;
 
-    public function __construct(Banner $model)
+    public function __construct(Service $model)
     {
         $this->model = $model;
     }
 
     public function datatable()
     {
-        $query = Banner::query();
+        $query = Service::query();
         return DataTables::of($query)
             ->addIndexColumn()
             ->addColumn('action', function ($model) {
-                return '<a href="'.route('admin.banners.edit', $model->id).'" class="btn btn-sm btn-primary" title="Edit"><i class="fas fa-edit"></i></a>
-                <form action="'.route('admin.banners.destroy', $model->id).'" method="POST" style="display: inline;">
+                return '<a href="'.route('admin.services.edit', $model->id).'" class="btn btn-sm btn-primary" title="Edit"><i class="fas fa-edit"></i></a>
+                <form action="'.route('admin.services.destroy', $model->id).'" method="POST" style="display: inline;">
             '.csrf_field().method_field('DELETE').'
             <button class="resetbtn btn btn-danger btn-sm" type="submit"><i class="fas fa-trash-alt"></i></button>
         </form>';
@@ -46,14 +46,12 @@ class BannerRepository implements BannerRepositoryInterface
 
     public function create(array $data)
     {
-        $maxOrder = Banner::max('order') ?? 0;
-        $data['order'] = $maxOrder + 1;
          if (isset($data['image']) && !empty($data['image'])) {
-                if (Str::contains($data['image'], '/banner/')) {
+                if (Str::contains($data['image'], '/service/')) {
                     $image_name = explode('/', $data['image']);
                     $image = $image_name[count($image_name) - 1];
                 } else {
-                    $image = $this->StoreImage($data['image'], '/banner/');
+                    $image = $this->StoreImage($data['image'], '/service/');
                 }
             } else {
                 $image = null;
@@ -67,11 +65,11 @@ class BannerRepository implements BannerRepositoryInterface
         $model = $this->model->find($id);
             if ($model) {
                 if (isset($data['image']) && !empty($data['image'])) {
-                    if (Str::contains($data['image'], '/banner/')) {
+                    if (Str::contains($data['image'], '/service/')) {
                         $image_name = explode('/', $data['image']);
                         $image = $image_name[count($image_name) - 1];
                     } else {
-                        $image = $this->StoreImage($data['image'], '/banner/');
+                        $image = $this->StoreImage($data['image'], '/service/');
                     }
                 } else {
                     $image = null;
@@ -87,7 +85,7 @@ class BannerRepository implements BannerRepositoryInterface
     {
         $model = $this->model->find($id);        
         if ($model) {
-            Storage::disk('public')->delete('/banner/'.$model->image);
+            Storage::disk('public')->delete('/service/'.$model->image);
             return $model->delete();
         }
         return false;

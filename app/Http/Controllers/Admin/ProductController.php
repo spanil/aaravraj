@@ -45,7 +45,7 @@ class ProductController extends Controller
     public function store(StoreRequest $request)
    {         
         $this->repository->create($request->validated());
-        return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
+        return redirect()->route('admin.products.index')->with('success',  __('messages.created'));
     }
 
     /**
@@ -74,7 +74,7 @@ class ProductController extends Controller
     public function update(UpdateRequest $request, string $id)
     {
         $this->repository->update($id, $request->validated());
-        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
+        return redirect()->route('admin.products.index')->with('success', __('messages.updated'));
     }
 
     /**
@@ -83,7 +83,7 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $this->repository->delete($id);
-        return redirect()->route('admin.products.index')->with('success', 'Product deleted.');
+        return redirect()->route('admin.products.index')->with('success', __('messages.deleted'));
     }
 
     public function getData()

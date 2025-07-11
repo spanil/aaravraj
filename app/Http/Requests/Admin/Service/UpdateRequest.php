@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Banner;
+namespace App\Http\Requests\Admin\Service;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -22,12 +22,13 @@ class UpdateRequest extends FormRequest
      */
    public function rules(): array
     {
-          $id = $this->route('category');
-          return [         
-            'name'    => 'required',       
-            'image'  => 'nullable',
-            'is_active'  => 'nullable',
-            'link'  => 'nullable',              
+         
+         return [          
+            'title'    => 'required',            
+            'image'  => 'nullable',            
+            'short_description'  => 'nullable',            
+            'description'  => 'nullable',            
+            'status'  => 'nullable',            
         ];
     }
 
@@ -35,9 +36,8 @@ class UpdateRequest extends FormRequest
     {
          return [         
            
-            'name.required' => 'Name  is Required.',           
+            'name.required' => 'Title  is Required.',           
            
-                      
         ];
     }
 }

@@ -44,7 +44,7 @@ class BannerController extends Controller
     public function store(StoreRequest $request)
    {  
         $this->repository->create($request->validated());
-        return redirect()->route('admin.banners.index')->with('success', 'Banner created successfully.');
+        return redirect()->route('admin.banners.index')->with('success', __('messages.created'));
     }
 
     /**
@@ -73,7 +73,7 @@ class BannerController extends Controller
     public function update(UpdateRequest $request, string $id)
     {
         $this->repository->update($id, $request->validated());
-        return redirect()->route('admin.banners.index')->with('success', 'Banner updated successfully.');
+        return redirect()->route('admin.banners.index')->with('success', __('messages.updated'));
     }
 
     /**
@@ -82,7 +82,7 @@ class BannerController extends Controller
     public function destroy(string $id)
     {
         $this->repository->delete($id);
-        return redirect()->route('admin.banners.index')->with('success', 'Banner deleted.');
+        return redirect()->route('admin.banners.index')->with('success', __('messages.deleted'));
     }
 
     public function getData()

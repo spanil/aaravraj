@@ -38,7 +38,7 @@ class GeneralSettingController extends Controller
    {         
          GeneralSetting::truncate();
         $this->repository->create($request->validated());
-        return redirect()->route('admin.general_settings.index')->with('success', 'GeneralSetting updated successfully.');
+        return redirect()->route('admin.general_settings.index')->with('success',  __('messages.updated'));
     }
 
 

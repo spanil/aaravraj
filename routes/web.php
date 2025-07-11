@@ -12,6 +12,9 @@ use App\Http\Controllers\Admin\RoleMenuPermissionController;
 use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Admin\PostController;
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -34,7 +37,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
     Route::resource('banners', BannerController::class)->except(['show']);
     Route::get('/banners/data', [BannerController::class, 'getData'])->name('banners.data'); 
     Route::resource('pages', PageController::class)->except(['show']);
-    Route::get('/pages/data', [PageController::class, 'getData'])->name('pages.data');   
+    Route::get('/pages/data', [PageController::class, 'getData'])->name('pages.data');    
+    Route::resource('posts', PostController::class)->except(['show']);
+    Route::get('/posts/data', [PostController::class, 'getData'])->name('posts.data');
+    Route::resource('services', ServiceController::class)->except(['show']); 
+    Route::get('/services/data', [ServiceController::class, 'getData'])->name('services.data');   
+   
+    Route::resource('staffs', StaffController::class)->except(['show']);
+    Route::get('/staffs/data', [StaffController::class, 'getData'])->name('staffs.data');   
 
 });
 Route::get('/email/verify', function () {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Banner;
+namespace App\Http\Requests\Admin\Staff;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,10 +22,18 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [          
+            'title'    => 'required',            
             'name'    => 'required',            
             'image'  => 'required',            
-            'is_active'  => 'nullable',                       
-            'link'  => 'nullable',            
+            'short_description'  => 'nullable',            
+            'description'  => 'nullable',            
+            'speciality'  => 'nullable',            
+            'degrees'  => 'nullable',            
+            'training'  => 'nullable',            
+            'contact_info'  => 'nullable',            
+            'work_days'  => 'nullable',            
+            'services'  => 'nullable|array',            
+            'status'  => 'nullable',            
         ];
     }
 
@@ -33,7 +41,8 @@ class StoreRequest extends FormRequest
     {
         return [
            
-            'name.required' => 'Name  is Required.',           
+            'name.required' => 'Title  is Required.',           
+            'title.required' => 'Title  is Required.',           
             'image.required' => 'Image  is Required.',            
         ];
     }

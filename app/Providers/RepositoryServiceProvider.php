@@ -17,6 +17,12 @@ use App\Repositories\BannerRepository;
 use App\Interfaces\BannerRepositoryInterface;
 use App\Repositories\PageRepository;
 use App\Interfaces\PageRepositoryInterface;
+use App\Repositories\PostRepository;
+use App\Interfaces\PostRepositoryInterface;
+use App\Repositories\ServiceRepository;
+use App\Interfaces\ServiceRepositoryInterface;
+use App\Repositories\StaffRepository;
+use App\Interfaces\StaffRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -32,6 +38,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(GeneralSettingRepositoryInterface::class, GeneralSettingRepository::class);
         $this->app->bind(BannerRepositoryInterface::class, BannerRepository::class);
         $this->app->bind(PageRepositoryInterface::class, PageRepository::class);
+        $this->app->bind(PostRepositoryInterface::class, PostRepository::class);
+        $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
+        $this->app->bind(StaffRepositoryInterface::class, StaffRepository::class);
     }
 
     /**

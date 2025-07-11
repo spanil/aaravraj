@@ -59,7 +59,7 @@ public function updatePermission(Request $request)
             ]
         );
 
-        return response()->json(['success' => true, 'message' => 'Permission updated successfully!']);
+        return response()->json(['success' => true, 'message' =>  __('messages.updated')]);
 
     } catch (\Exception $e) {
         \Log::error('Error updating menu permission: ' . $e->getMessage(), $request->all());

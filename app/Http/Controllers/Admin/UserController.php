@@ -46,7 +46,7 @@ class UserController extends Controller
     public function store(StoreRequest $request)
    {  
         $this->repository->create($request->validated());
-        return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
+        return redirect()->route('admin.users.index')->with('success',  __('messages.created'));
     }
 
     /**
@@ -75,7 +75,7 @@ class UserController extends Controller
     public function update(UpdateRequest $request, string $id)
     {
         $this->repository->update($id, $request->validated());
-        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('admin.users.index')->with('success', __('messages.updated'));
     }
 
     /**
@@ -84,7 +84,7 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $this->repository->delete($id);
-        return redirect()->route('admin.users.index')->with('success', 'User deleted.');
+        return redirect()->route('admin.users.index')->with('success', __('messages.deleted'));
     }
 
     public function getData()
