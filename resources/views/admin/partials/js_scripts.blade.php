@@ -39,6 +39,14 @@
         }
       });
     </script>
+
+  <script>
+document.getElementById('languageSwitcher').addEventListener('change', function() {
+    const locale = this.value;
+    window.location.href = `/lang/${locale}`;
+});
+</script>
+
     <!--end::OverlayScrollbars Configure-->
     <!-- OPTIONAL SCRIPTS -->
     <!-- apexcharts -->

@@ -15,12 +15,54 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\PostController;
+// Route::get('lang/{locale}', function ($locale) {
+//     // session(['locale' => $locale]);
+//     // dd('Locale set to: ' . session('locale'));
+//     if (in_array($locale, ['en', 'ne'])) {
+//         session(['locale' => $locale]);
+//         // \Log::debug('Locale saved to session: ' . session('locale'));
+//     }
+//     return redirect()->back();
+// })->name('lang.switch');
+
+
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ne'])) {
+        session(['locale' => $locale]);
+        
+        // Debug session immediately after setting
+        \Log::debug('Language switched', [
+            'requested_locale' => $locale,
+            'session_locale' => session('locale'),
+            'session_id' => session()->getId()
+        ]);
+    }
+    return redirect()->back();
+})->name('lang.switch');
+
+// Route::get('/test-session', function () {
+//     session(['test_key' => 'hello']);
+//     return redirect('/check-session');
+// });
+
+// Route::get('/test-session-set', function () {
+//     session(['test' => 'Hello Laravel']);
+//     return redirect('/test-session-get');
+// });
+
+// Route::get('/test-session-get', function () {
+//     return 'Session test: ' . session('test');
+// });
+
+// Route::get('/check-session', function () {
+//     return session('test_key'); // should return "hello"
+// });
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified','setlocale'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('roles', RoleController::class)->except(['show']); 
     Route::get('/roles/data', [RoleController::class, 'getData'])->name('roles.data'); 

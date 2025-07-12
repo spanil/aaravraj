@@ -16,6 +16,12 @@
           <ul class="navbar-nav ms-auto">
             <!--begin::Navbar Search-->
             <li class="nav-item">
+             <select id="languageSwitcher" class="form-control form-control-sm">
+  <option value="en" {{ session('locale') == 'en' ? 'selected' : '' }}>English</option>
+  <option value="ne" {{ session('locale') == 'ne' ? 'selected' : '' }}>नेपाली</option>
+</select>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                 <i class="bi bi-search"></i>
               </a>
@@ -52,7 +58,7 @@
                     </div>
                   </div>
                   <!--end::Message-->
-                </a>
+                </a>      
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
                   <!--begin::Message-->
