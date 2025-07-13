@@ -28,39 +28,47 @@
               data-accordion="false"
             >
 
-            @foreach($sidebarMenus as $sidebarMenu)
-            @php 
-            $childRoutes = $sidebarMenu->children->pluck('menu_controller')->toArray();
-            $isParentActive = request()->routeIs(...$childRoutes);
-            @endphp
-              <li class="nav-item {{ $isParentActive ? 'menu-open' : '' }}">
-                <a href="#" class="nav-link ">
-                  <i class="nav-icon bi bi-speedometer"></i>
-                  <p>
-                    {{$sidebarMenu->menu_name}} 
-                    <i class="nav-arrow bi bi-chevron-right"></i>
-                  </p>
-                </a>
-                  @if($sidebarMenu->children->isNotEmpty())                                               
-                  @foreach($sidebarMenu->children as $sidebarchildMenu)
-                  @php  $isActive = request()->routeIs($sidebarchildMenu->menu_controller); @endphp
+ @foreach($sidebarMenus as $sidebarMenu)
+    @php 
+        $childRoutes = $sidebarMenu->children->pluck('menu_controller')->toArray();
+        $isParentActive = false;
 
-                <ul class="nav nav-treeview">
-                 
-                  <li class="nav-item">
-                    <a href="{{route($sidebarchildMenu->menu_controller)}}" class="nav-link {{ $isActive ? 'active' : '' }}">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>{{$sidebarchildMenu->menu_name}}</p>
-                    </a>
-                  </li>
-                 
-            
-                </ul>
-                 @endforeach
-                  @endif
-              </li>
-              @endforeach
-      
+        foreach ($childRoutes as $route) {
+            // Match admin.roles.*, admin.users.*, etc.
+            $routePrefix = Str::beforeLast($route, '.'); // removes ".index"
+            if (request()->routeIs($routePrefix . '.*')) {
+                $isParentActive = true;
+                break;
+            }
+        }
+    @endphp
+
+    <li class="nav-item {{ $isParentActive ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ $isParentActive ? 'active' : '' }}">
+            <i class="nav-icon bi bi-speedometer"></i>
+            <p>{{ $sidebarMenu->menu_name }}
+                <i class="nav-arrow bi bi-chevron-right"></i>
+            </p>
+        </a>
+
+        @if($sidebarMenu->children->isNotEmpty())
+            <ul class="nav nav-treeview">
+                @foreach($sidebarMenu->children as $sidebarchildMenu)
+                    @php
+                        $routePrefix = Str::beforeLast($sidebarchildMenu->menu_controller, '.');
+                        $isActive = request()->routeIs($routePrefix . '.*');
+                    @endphp
+                    <li class="nav-item">
+                        <a href="{{ route($sidebarchildMenu->menu_controller) }}" class="nav-link {{ $isActive ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-circle"></i>
+                            <p>{{ $sidebarchildMenu->menu_name }}</p>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
+    </li>
+@endforeach
               
              
             </ul>

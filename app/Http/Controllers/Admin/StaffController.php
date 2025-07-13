@@ -85,6 +85,13 @@ class StaffController extends Controller
         return redirect()->route('admin.staffs.index')->with('success', __('messages.deleted'));
     }
 
+    public function destroyImage($id)
+    {
+        
+        $this->repository->destroyImage($id);
+        return response()->json(['success' => true, 'message' => 'Image deleted successfully']);
+    }
+
     public function getData()
     {
         return $this->repository->datatable();

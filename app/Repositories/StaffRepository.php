@@ -79,7 +79,7 @@ class StaffRepository implements StaffRepositoryInterface
             return $model;
         }
         return null; 
-    }
+    }    
 
     public function delete($id)
     {
@@ -89,6 +89,17 @@ class StaffRepository implements StaffRepositoryInterface
             return $model->delete();
         }
         return false;
+    }
+
+    public function destroyImage($id)
+    {       
+        $model = $this->model->find($id);  
+        if ($model->image) {
+            Storage::disk('public')->delete('/staff/'.$model->image);
+        }
+        $model->image = null;
+        $model->save();
+        return $model;
     }
 }
 ?>

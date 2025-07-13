@@ -74,11 +74,11 @@
 
                                 <div class="form-group">
                                     @if($data->image)
-                                      <div>
+                                      <div id="image-preview">>
                                         <img src="{{ asset('storage/staff/'.$data->image) }}" width="100">
-                                        <label>
-                                          <input type="checkbox" name="delete_image" value="1"> Delete this image
-                                        </label>
+                                        
+                                    <button type="button" class="btn btn-outline-danger btn-sm"  id="delete-image" data-id="{{ $data->id }}">Delete Image</button>
+                                        
                                       </div>
                                     @endif
                                     <label for="image">Image</label>
@@ -267,5 +267,23 @@
     $(document).on('click', '.deleteAssesmentRow', function () {
         $(this).closest('.removeformgroup').remove();
     });
+  $('#delete-image').on('click', function () {
+    if (!confirm('Are you sure you want to delete the image?')) return;
+    var id = $(this).data('id');
+
+    $.ajax({
+      url: '/admin/staffs/image/' + id,
+      type: 'DELETE',
+      data: {
+        _token: '{{ csrf_token() }}'
+      },
+      success: function (response) {
+        $('#image-preview').remove();
+      },
+      error: function () {
+        alert('Something went wrong while deleting the image.');
+      }
+    });
+  });
 </script>
 @endpush
