@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\FaqController;
 Route::get('lang/{locale}', function ($locale) {
     if (in_array($locale, ['en', 'ne'])) {
         session(['locale' => $locale]);
@@ -55,7 +56,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified','setlocal
     Route::get('/services/data', [ServiceController::class, 'getData'])->name('services.data');
     Route::resource('staffs', StaffController::class)->except(['show']);
     Route::get('/staffs/data', [StaffController::class, 'getData'])->name('staffs.data');
-    Route::delete('/staffs/image/{id}', [StaffController::class, 'destroyImage'])->name('staffs.image.destroy');   
+    Route::delete('/staffs/image/{id}', [StaffController::class, 'destroyImage'])->name('staffs.image.destroy');
+    Route::resource('faqs', FaqController::class)->except(['show']);   
+    Route::get('/faqs/data', [FaqController::class, 'getData'])->name('faqs.data');   
 
 });
 Route::get('/email/verify', function () {

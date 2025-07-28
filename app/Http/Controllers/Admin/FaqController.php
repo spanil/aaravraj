@@ -1,20 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\Site;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-Use App\Models\Banner;
+use Illuminate\Http\Request;
+use App\Interfaces\FaqRepositoryInterface;
+Use App\Models\Faq;
+use App\Http\Requests\Admin\Faq\DeleteRequest;
+use App\Http\Requests\Admin\Faq\ListRequest;
+use App\Http\Requests\Admin\Faq\StoreRequest;
+use App\Http\Requests\Admin\Faq\UpdateRequest;
 
-
-class HomeController extends Controller
+class FaqController extends Controller
 {
-   
+    private $repository;
+
+    public function __construct(FaqRepositoryInterface $repository)
+    {
+       $this->repository = $repository;
+    }
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        return view('web.index');
+        $datas = $this->repository->all();
+        return view('admin/faqs.index')->with('datas', $datas);
 
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -22,7 +35,7 @@ class HomeController extends Controller
     public function create()    {
        
         
-         return view('admin/banners.create');
+         return view('admin/faqs.create');
     }
 
     /**
@@ -31,7 +44,7 @@ class HomeController extends Controller
     public function store(StoreRequest $request)
    {  
         $this->repository->create($request->validated());
-        return redirect()->route('admin.banners.index')->with('success', __('messages.created'));
+        return redirect()->route('admin.faqs.index')->with('success',  __('messages.created'));
     }
 
     /**
@@ -40,7 +53,7 @@ class HomeController extends Controller
     public function show(string $id)
     {
         $data = $this->repository->find($id);
-        return view('admin/banners.show', compact('data'));
+        return view('admin/faqs.show', compact('data'));
 
     }
 
@@ -51,7 +64,7 @@ class HomeController extends Controller
     {
         $data = $this->repository->find($id);
        
-        return view('admin/banners.edit', compact('data'));
+        return view('admin/faqs.edit', compact('data'));
     }
 
     /**
@@ -60,7 +73,7 @@ class HomeController extends Controller
     public function update(UpdateRequest $request, string $id)
     {
         $this->repository->update($id, $request->validated());
-        return redirect()->route('admin.banners.index')->with('success', __('messages.updated'));
+        return redirect()->route('admin.faqs.index')->with('success', __('messages.updated'));
     }
 
     /**
@@ -69,7 +82,7 @@ class HomeController extends Controller
     public function destroy(string $id)
     {
         $this->repository->delete($id);
-        return redirect()->route('admin.banners.index')->with('success', __('messages.deleted'));
+        return redirect()->route('admin.faqs.index')->with('success', __('messages.deleted'));
     }
 
     public function getData()

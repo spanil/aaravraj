@@ -86,34 +86,34 @@
                   
                     <nav id="responsive-menu" class="menu-centered">
                         <ul class="menu vertical medium-horizontal" data-responsive-menu="accordion medium-dropdown">
-                            <li class="single-sub parent-nav"><a href="index-2.html">Home Page</a>
-                                <ul class="child-nav menu vertical">
+                            <li class="single-sub parent-nav"><a href="./">Home Page</a>
+                                <!-- <ul class="child-nav menu vertical">
                                     <li><a href="index-2.html">Home Version 1</a></li>
                                     <li><a href="index2.html">Home Version 2</a></li>
                                     <li><a href="boxed.html">Boxed Layout</a></li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <li class="single-sub parent-nav"><a href="about-us.html"> Pages </a>
                                 <ul class="child-nav menu vertical">
-                                    <li><a href="about-us.html">About Us</a></li>
-                                    <li><a href="faq.html">Faq's</a></li>
-                                    <li><a href="gallery.html">Gallery</a></li>
+                                    <li><a href="{{route('about-us')}}">About Us</a></li>
+                                    <li><a href="{{route('faq')}}">Faq's</a></li>
+                                    <!-- <li><a href="gallery.html">Gallery</a></li>
                                     <li><a href="testimonials.html">Testimonials</a></li>
                                     <li><a href="price-list.html">Pricing List</a></li>
                                     <li><a href="appointment.html">Appointment</a></li>
-                                    <li><a href="404.html">404 Page</a></li>                                         
+                                    <li><a href="404.html">404 Page</a></li>                                          -->
                                 </ul>
                             </li>
                             <li class="single-sub parent-nav"><a href="services.html">Services</a>
                                 <ul class="child-nav menu vertical">
-                                    <li><a href="services.html">Services</a></li>
-                                    <li><a href="single-service.html">Single Service</a></li>                                        
+                                    <li><a href="{{route('services')}}">Services</a></li>
+                                    <li><a href="{{route('service-detail', ['service-one'])}}">Single Service</a></li>                                        
                                 </ul>
                             </li>
                             <li class="single-sub parent-nav"><a href="our-staff.html"> Staff</a>
                                 <ul class="child-nav menu vertical">
-                                    <li><a href="our-staff.html">Our Staff</a></li>
-                                    <li><a href="single-doctor.html">Single Doctor</a></li>                                        
+                                    <li><a href="{{route('staffs')}}">Our Staff</a></li>
+                                    <li><a href="{{route('staff-detail',['hari-hari'])}}">Single Doctor</a></li>                                        
                                 </ul>
                             </li>
                             <li class="single-sub parent-nav">
