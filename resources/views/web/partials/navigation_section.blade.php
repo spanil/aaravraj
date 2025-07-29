@@ -86,7 +86,7 @@
                   
                     <nav id="responsive-menu" class="menu-centered">
                         <ul class="menu vertical medium-horizontal" data-responsive-menu="accordion medium-dropdown">
-                            <li class="single-sub parent-nav"><a href="./">Home Page</a>
+                            <li class="single-sub parent-nav"><a href="{{route('home')}}">Home Page</a>
                                 <!-- <ul class="child-nav menu vertical">
                                     <li><a href="index-2.html">Home Version 1</a></li>
                                     <li><a href="index2.html">Home Version 2</a></li>
@@ -96,7 +96,7 @@
                             <li class="single-sub parent-nav"><a href="about-us.html"> Pages </a>
                                 <ul class="child-nav menu vertical">
                                     <li><a href="{{route('about-us')}}">About Us</a></li>
-                                    <li><a href="{{route('faq')}}">Faq's</a></li>
+                                    <li><a href="{{route('faqs')}}">Faq's</a></li>
                                     <!-- <li><a href="gallery.html">Gallery</a></li>
                                     <li><a href="testimonials.html">Testimonials</a></li>
                                     <li><a href="price-list.html">Pricing List</a></li>
@@ -117,7 +117,7 @@
                                 </ul>
                             </li>
                             <li class="single-sub parent-nav">
-                                <a href="appointment.html">Appointment</a>
+                                <a href="{{route('appointments')}}">Appointment</a>
                             </li>
                             <li class="single-sub parent-nav"><a href="shop.html">Shop</a>
                                 <ul class="child-nav menu vertical"> 
@@ -129,11 +129,11 @@
                             </li>
                             <li class="single-sub parent-nav"><a href="blog.html">Blog</a>
                                 <ul class="child-nav menu vertical">
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="single-post.html">Single Post</a></li>
+                                    <li><a href="{{route('blogs')}}">Blog</a></li>
+                                    <li><a href="{{route('blog-detail',['hari-hari'])}}">Single Post</a></li>
                                 </ul>
                             </li>
-                            <li class="single-sub parent-nav"><a href="contact.html">Contact</a></li>
+                            <li class="single-sub parent-nav"><a href="{{route('contact-us')}}">Contact</a></li>
                         </ul>
                         </nav>
                 </div><!-- top-bar Ends -->

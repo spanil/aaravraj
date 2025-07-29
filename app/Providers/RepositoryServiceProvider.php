@@ -25,6 +25,8 @@ use App\Repositories\StaffRepository;
 use App\Interfaces\StaffRepositoryInterface;
 use App\Repositories\FaqRepository;
 use App\Interfaces\FaqRepositoryInterface;
+use App\Repositories\TestimonialRepository;
+use App\Interfaces\TestimonialRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -44,6 +46,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
         $this->app->bind(StaffRepositoryInterface::class, StaffRepository::class);
         $this->app->bind(FaqRepositoryInterface::class, FaqRepository::class);
+        $this->app->bind(TestimonialRepositoryInterface::class, TestimonialRepository::class);
     }
 
     /**

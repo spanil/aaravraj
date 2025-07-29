@@ -46,6 +46,8 @@ class PostRepository implements PostRepositoryInterface
 
     public function create(array $data)
     {
+        $maxOrder = Post::max('order') ?? 0;
+        $data['order'] = $maxOrder + 1;
         if (isset($data['image']) && !empty($data['image'])) {
             if (Str::contains($data['image'], '/post/')) {
                 $image_name = explode('/', $data['image']);

@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\TestimonialController;
 Route::get('lang/{locale}', function ($locale) {
     if (in_array($locale, ['en', 'ne'])) {
         session(['locale' => $locale]);
@@ -59,6 +60,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified','setlocal
     Route::delete('/staffs/image/{id}', [StaffController::class, 'destroyImage'])->name('staffs.image.destroy');
     Route::resource('faqs', FaqController::class)->except(['show']);   
     Route::get('/faqs/data', [FaqController::class, 'getData'])->name('faqs.data');   
+    Route::resource('testimonials', TestimonialController::class)->except(['show']);   
+    Route::get('/testimonials/data', [TestimonialController::class, 'getData'])->name('testimonials.data');   
 
 });
 Route::get('/email/verify', function () {

@@ -83,20 +83,7 @@
                                     <div id="image-preview-container" class="mt-2" style="display: none;">
                                         <img id="image-preview" src="#" alt="Image Preview" class="img-thumbnail" style="max-width: 200px; height: auto;">
                                     </div>
-                                </div>
-
-                      
-
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Order</label>
-                                    <input type="text" name="order"  class="form-control" id="order" placeholder="Enter Order" value="{{
-                                        $data->order}}">
-                                    @if ($errors->has('order'))
-                                        <span class="help-block" style="color: red;">
-                                                            <strong>{{ $errors->first('order') }}</strong>
-                                                        </span>
-                                    @endif
-                                </div>
+                                </div>                      
 
                                 <div class="form-group">
                                     <label>Status</label>
